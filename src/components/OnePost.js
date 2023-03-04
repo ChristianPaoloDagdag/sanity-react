@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import sanityClient from "../client.js";
-import BlockContent from "@sanity/block-content-to-react";
 import imageUrlBuilder from "@sanity/image-url";
+import SanityBlockContent from "@sanity/block-content-to-react";
 
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
@@ -53,11 +53,7 @@ export default function OnePost() {
       </div>
       <img src={urlFor(postData.mainImage).width(200).url()} alt="" />
       <div>
-        <BlockContent
-          blocks={postData.body}
-          projectId={sanityClient.projectId}
-          dataset={sanityClient.dataset}
-        />
+        <div>{postData.body[0].children[0].text}</div>
       </div>
     </div>
   );
